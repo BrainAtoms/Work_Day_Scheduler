@@ -21,6 +21,32 @@ $(function () {
 
   $("#currentDay").text(currentDay.format("dddd MMM D, YYYY"));
   checkStorage();
+
+  function hourCompare() {
+    const rows = $(".time-block");
+    for (i = 0; i < rows.length; i++) {
+      var row = rows[i]; 
+      var rowId = rows[i].id
+      // console.log(rowId)
+      // var rowHour = rowId - 'hour-'
+      var rowHour = parseInt(rowId.replace('hour-',''))
+      // console.log(rowHour)
+      if (rowHour < dayjs().hour()) {
+        row.classList.add('past')
+      }
+      if (rowHour === dayjs().hour()) {
+        row.classList.add('present')
+      }
+      if (rowHour > dayjs().hour()) {
+        row.classList.add('future')
+      }
+      // console.log(dayjs().hour())
+    }
+    // console.log(rows);
+  } 
+  hourCompare()
+  
+
   // TODO: Add a listener for click events on the save button. This code should
   // use the id in the containing time-block as a key to save the user input in
   // local storage. HINT: What does `this` reference in the click listener
@@ -41,16 +67,14 @@ $(function () {
   // TODO: Add code to display the current date in the header of the page.
 });
 
+const timeArray = [9, 10, 11, 12, 13, 14, 15, 16, 17];
+
 function checkStorage() {
-  const timeArray = [9, 10, 11, 12, 1, 2, 3, 4, 5];
   for (i = 0; i < timeArray.length; i++) {
     const currentKey = `text-area${timeArray[i]}`;
     const value = localStorage.getItem(timeArray[i]);
-    console.log(currentKey);
-    console.log(value);
+    // console.log(currentKey);
+    // console.log(value);
     document.getElementById(currentKey).value = value;
-
   }
 }
-
-
