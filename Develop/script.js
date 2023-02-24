@@ -6,9 +6,9 @@ const onSaveClick = (event) => {
   const clickedTime = event.currentTarget.id;
   // console.log('clickedTime')
   // console.log(clickedTime)
-  const idOfTextArea = 'text-area' + clickedTime; 
+  const idOfTextArea = "text-area" + clickedTime;
   // console.log(idOfTextArea)
-  const hourText = document.getElementById(idOfTextArea)
+  const hourText = document.getElementById(idOfTextArea);
   // console.log('hourText.value')
   // console.log(hourText.value)
   // console.log(event.currentTarget.id);
@@ -16,13 +16,11 @@ const onSaveClick = (event) => {
   // window.localStorage.clear();
 };
 
-
-
 $(function () {
   currentDay = dayjs();
 
   $("#currentDay").text(currentDay.format("dddd MMM D, YYYY"));
-  checkStorage()
+  checkStorage();
   // TODO: Add a listener for click events on the save button. This code should
   // use the id in the containing time-block as a key to save the user input in
   // local storage. HINT: What does `this` reference in the click listener
@@ -43,15 +41,16 @@ $(function () {
   // TODO: Add code to display the current date in the header of the page.
 });
 
- function checkStorage() {
-  for (i = 9; i <= 12; i++) {
-    const currentKey = `text-area${i}`
-    const value = localStorage.getItem(i)
-    console.log(currentKey)
-    console.log(value)
-    document.getElementById(currentKey).value = value; 
+function checkStorage() {
+  const timeArray = [9, 10, 11, 12, 1, 2, 3, 4, 5];
+  for (i = 0; i < timeArray.length; i++) {
+    const currentKey = `text-area${timeArray[i]}`;
+    const value = localStorage.getItem(timeArray[i]);
+    console.log(currentKey);
+    console.log(value);
+    document.getElementById(currentKey).value = value;
+
   }
 }
 
-const timeArray = [9,10,11,12,1,2,3,4,5]
 
