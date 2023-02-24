@@ -2,50 +2,62 @@
 // the code isn't run until the browser has finished rendering all the elements
 // in the html.
 
-const onSaveClick = (event) => {
-  const clickedTime = event.currentTarget.id;
-  // console.log('clickedTime')
-  // console.log(clickedTime)
-  const idOfTextArea = "text-area" + clickedTime;
-  // console.log(idOfTextArea)
-  const hourText = document.getElementById(idOfTextArea);
-  // console.log('hourText.value')
-  // console.log(hourText.value)
-  // console.log(event.currentTarget.id);
-  localStorage.setItem(clickedTime, hourText.value);
-  // window.localStorage.clear();
-};
-
 $(function () {
+  const timeArray = [9, 10, 11, 12, 13, 14, 15, 16, 17];
   currentDay = dayjs();
 
   $("#currentDay").text(currentDay.format("dddd MMM D, YYYY"));
   checkStorage();
 
+  const onSaveClick = (event) => {
+    const clickedTime = event.currentTarget.id;
+    console.log('clickedTime')
+    console.log(clickedTime)
+    const idOfTextArea = "text-area" + clickedTime;
+    // console.log(idOfTextArea)
+    const hourText = document.getElementById(idOfTextArea);
+    // console.log('hourText.value')
+    // console.log(hourText.value)
+    // console.log(event.currentTarget.id);
+    localStorage.setItem(clickedTime, hourText.value);
+    // window.localStorage.clear();
+  };
+
+  $('.saveBtn').on('click', onSaveClick); 
+
   function hourCompare() {
     const rows = $(".time-block");
     for (i = 0; i < rows.length; i++) {
-      var row = rows[i]; 
-      var rowId = rows[i].id
+      var row = rows[i];
+      var rowId = rows[i].id;
       // console.log(rowId)
       // var rowHour = rowId - 'hour-'
-      var rowHour = parseInt(rowId.replace('hour-',''))
+      var rowHour = parseInt(rowId.replace("hour-", ""));
       // console.log(rowHour)
       if (rowHour < dayjs().hour()) {
-        row.classList.add('past')
+        row.classList.add("past");
       }
       if (rowHour === dayjs().hour()) {
-        row.classList.add('present')
+        row.classList.add("present");
       }
       if (rowHour > dayjs().hour()) {
-        row.classList.add('future')
+        row.classList.add("future");
       }
       // console.log(dayjs().hour())
     }
     // console.log(rows);
-  } 
-  hourCompare()
+  }
+  hourCompare();
   
+  function checkStorage() {
+    for (i = 0; i < timeArray.length; i++) {
+      const currentKey = `text-area${timeArray[i]}`;
+      const value = localStorage.getItem(timeArray[i]);
+      // console.log(currentKey);
+      // console.log(value);
+      document.getElementById(currentKey).value = value;
+    }
+  }
 
   // TODO: Add a listener for click events on the save button. This code should
   // use the id in the containing time-block as a key to save the user input in
@@ -67,14 +79,6 @@ $(function () {
   // TODO: Add code to display the current date in the header of the page.
 });
 
-const timeArray = [9, 10, 11, 12, 13, 14, 15, 16, 17];
 
-function checkStorage() {
-  for (i = 0; i < timeArray.length; i++) {
-    const currentKey = `text-area${timeArray[i]}`;
-    const value = localStorage.getItem(timeArray[i]);
-    // console.log(currentKey);
-    // console.log(value);
-    document.getElementById(currentKey).value = value;
-  }
-}
+
+
