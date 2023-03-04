@@ -4,8 +4,7 @@ The Work Day Scheduler was created as a resource for people to schedule their cu
 
 # ![Screen Shot 2023-02-27 at 4 15 00 PM](https://user-images.githubusercontent.com/61917285/221687628-aac7e080-c01a-40dc-a3d8-3eb958057a91.png)
 
-#
-[Work Day Scheduler]
+#[Work Day Scheduler](https://brainatoms.github.io/Work_Day_Scheduler/)
 
 ## Installation
 
